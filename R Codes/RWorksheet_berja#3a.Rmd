@@ -30,6 +30,7 @@ Based on the above vector LETTERS:
 a. You need to produce a vector that contains the first 11 letters.
 
 ```{r}
+
 first_11_letters <- LETTERS[1:11]
 first_11_letters
 ```

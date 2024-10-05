@@ -18,6 +18,7 @@ a.	Sequence from -5 to 5. Write the R code and its output.
 Describe its output.
 
 ```{r}
+
 seq(-5,5)
 ```
 Using sequence it gave out 11 elements ranging from -5 to 5.

@@ -1,0 +1,159 @@
+---
+title: "RWorksheet_berja#3b"
+author: "Forge"
+date: "2024-10-02"
+output: pdf_document
+---
+
+```{r setup, include=FALSE}
+knitr::opts_chunk$set(echo = TRUE)
+```
+
+Create a data frame using the table below.
+
+
+a. Write the codes.
+```{r}
+tableData <- data.frame(
+  RespondentID = c(1:20),
+  Gender = c(2,2,1,2,2,2,2,2,2,2,1,2,2,2,2,2,2, 2, 1,2),
+  Fathers_Job = c(1, 3, 3, 3, 1, 2, 3, 1, 1, 1, 3, 2, 1, 3, 3, 1, 3, 1, 2, 1),
+  HouseholdSize = c(5, 7, 3, 8, 5, 9, 6, 7, 8, 4, 7, 5, 4, 7, 8, 8, 3, 11, 7, 6),
+  SchoolAgeSiblings = c(6, 4, 4, 1, 2, 1, 5, 3, 1, 2, 3, 2, 5, 5, 2, 1, 2, 5, 3, 2),
+  HomeType = c(1, 2, 3, 1, 1, 3, 3, 1, 2, 3, 2, 3, 2, 2, 3, 3, 3, 3, 3, 2)
+)
+
+tableData
+```
+
+\pagebreak
+b. Describe the data. Get the structure or the summary of the data
+```{r}
+
+str(tableData)
+
+
+summary(tableData)
+```
+
+
+c. Is the mean number of siblings attending is 5?
+```{r}
+meanSchoolSiblings <- mean(tableData$SchoolAgeSiblings)
+meanSchoolSiblings
+```
+
+
+
+d. Extract the 1st two rows and then all the columns using the subsetting functions.
+Write the codes and its output.
+```{r}
+subset_Respondents <- subset(tableData, RespondentID <= 2)
+subset_Respondents
+```
+
+
+e. Extract 3rd and 5th row with 2nd and 4th column. Write the codes and its result.
+```{r}
+specificData <- tableData[c(3,5), c("Gender", "HouseholdSize")]
+specificData
+```
+
+\pagebreak
+f. Select the variable types of houses then store the vector that results as types_houses.
+Write the codes.
+```{r}
+homeTypes <- tableData$HomeType
+homeTypes
+```
+
+
+g. Select only all Males respondent that their father occupation was farmer.
+```{r}
+maleFarmers <- tableData[tableData$Gender == 1 & tableData$Fathers_Job == 1, ]
+maleFarmers
+```
+
+h. Select only all females respondent that have greater than or equal to 5 number of
+siblings attending school. Write the codes and its outputs.
+```{r}
+femaleManySiblings <- tableData[tableData$Gender == 2 & tableData$SchoolAgeSiblings >= 5, ]
+femaleManySiblings
+```
+
+2. Write a R program to create an empty data frame. Using the following codes:
+```{r}
+df_empty <- data.frame(
+  Ints = integer(), 
+  Doubles = double(), 
+  Strings = character(), 
+  Booleans = logical(), 
+  Categories = factor(), 
+  stringsAsFactors = FALSE
+)
+print("Structure of the empty data frame:")
+str(df_empty)
+```
+
+a. Describe the results.
+
+a. Import the csv file into the R environment. Write the codes.
+```{r}
+HouseHold <- read.csv("HouseholdData1.csv")
+HouseHold
+```
+
+b. Convert the Sex into factor using factor() function and change it into integer.[Legend:
+Male = 1 and Female = 2]. Write the R codes and its output.
+```{r}
+HouseHold$Sex <- factor(HouseHold$Sex, levels = c("Male", "Female"), labels = c(1, 2))
+HouseHold$Sex <- as.integer(HouseHold$Sex)
+HouseHold
+```
+
+\pagebreak
+c. Convert the Type of Houses into factor and change it into integer. [Legend: Wood
+= 1; Congrete = 2; Semi-Congrete = 3]. Write the R codes and its output.
+```{r}
+HouseHold$Types.of.Houses <- factor(HouseHold$Types.of.Houses, 
+                                     levels = c("Wood", "Concrete", "Semi-concrete"), 
+                                     labels = c(1, 2, 3))
+HouseHold$Types.of.Houses <- as.integer(HouseHold$Types.of.Houses)
+HouseHold
+```
+
+d. On father’s occupation, factor it as Farmer = 1; Driver = 2; and Others = 3. What
+is the R code and its output?
+```{r}
+HouseHold$Fathers.Occupation <- factor(HouseHold$Fathers.Occupation, 
+                                       levels = c(1, 2, 3), 
+                                       labels = c("Farmer", "Driver", "Others"))
+HouseHold
+```
+
+e. Select only all females respondent that has a father whose occupation is driver. Write
+the codes and its output.
+```{r}
+femaleDriver <- subset(HouseHold, Sex == 2 & Fathers.Occupation == "Driver")
+femaleDriver
+```
+
+f. Select the respondents that have greater than or equal to 5 number of siblings attending
+school. Write the codes and its output.
+```{r}
+SiblingSchool <- subset(HouseHold, Siblings.at.School >= 5)
+SiblingSchool
+```
+
+4. Interpret the graph.
+
+The data illustrates that from July 14 to July 21, 2020, there were more unfavorable tweets each day than any other category. Positive tweets were the second highest, with the fewest neutral messages.
+
+
+
+
+
+
+
+
+
