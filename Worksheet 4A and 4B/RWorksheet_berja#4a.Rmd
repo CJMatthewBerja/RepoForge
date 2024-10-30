@@ -73,8 +73,129 @@ levels(factor_months_vector)
 
 3. Then check the summary() of the months_vector and factor_months_vector. | Interpret the results of both vectors. Are they both equally useful in this case?
 ```{r}
+summary(months)
+
+summary(factor_months_vector)
+```
+
+The Character Summary only gives out the length and class of its desired vector while the Factor Vector Summary gives us an idea of how many times each month appears in the data.
+
+4. Create a vector and factor for the table below.
+```{r}
+factor_data <- c("East", "West", "North")
+frequency_vector <- c(1, 4, 3)
+new_order_data <- factor(factor_data,levels = c("East","West","North"))
+print(new_order_data)
+```
+
+5. Enter the data below in Excel with file name = import_march.csv
+```{r}
+#a
+data <- read.table("import_march.csv", header = TRUE, sep = ",")
+```
+
+\pagebreak
+B. View the dataset. Write the R scripts and its result.
+```{r}
+data
+```
+
+
+6.
+```{r}
+exhaustive_search <- function() {
+  # Get input from the user and check if it's a valid number
+  number <- suppressWarnings(as.integer(readline(prompt = "Please select a number between 1 and 50: ")))
+  if (is.na(number)) {
+    print("Invalid input. Please enter a number.")
+  } else if (number < 1 || number > 50) {
+    print("The number selected is beyond the range of 1 to 50")
+  } else if (number == 20) {
+    print(TRUE)
+  } else {
+    print(number)
+  }
+}
+exhaustive_search()
+```
+
+
+7. 
+```{r}
+min_bills <- function(price) {
+  bills <- c(1000, 500, 200, 100, 50)
+  count <- 0
+  for (bill in bills) {
+    
+    while (price >= bill) {
+      price <- price - bill  
+      count <- count + 1   
+    }
+  }
+  return(count)
+}
+snack_price <- 3100
+cat("Minimum number of bills needed:", min_bills(snack_price), "\n")
+```
+
+\pagebreak
+8.
+a. Create a dataframe from the above table. Write the R codes and its output.
+```{r}
+# a
+grades <- data.frame(
+  Name = c("Annie", "Thea", "Steve", "Hanna"),
+  Grade1 = c(85, 65, 75, 95),
+  Grade2 = c(65, 75, 55, 75),
+  Grade3 = c(85, 90, 80, 100),
+  Grade4 = c(100, 90, 85, 90)
+)
+print(grades)
 
 ```
+
+
+b.Without using the rowMean function, output the average score of students whose average math score over 90 points during the semester. write R code and its output.
+Example Output: Annie’s average grade this semester is 88.75.
+```{r}
+for (i in 1:nrow(grades)) {
+  avg <- sum(grades[i, 2:5]) / 4
+  print(paste(grades$Name[i], "'s average grade this semester is", avg))
+}
+```
+
+c. Without using the mean function, output as follows for the tests in which the average score was less than 80 out of 4 tests.
+Example output: The nth test was difficult.
+```{r}
+for (j in 2:5) {
+  avg_test <- mean(grades[,j])
+  if (avg_test < 80) {
+    print(paste("The", j-1, "test was difficult with an average score of", avg_test))
+  }
+}
+```
+
+d. Without using the max function, output as follows for students whose highest score for a semester exceeds 90 points.
+Example Output: Annie’s highest grade this semester is 95.
+```{r}
+for (i in 1:nrow(grades)) {
+  highest_score <- grades[i, 2]  
+  for (j in 3:5) {  
+    if (grades[i, j] > highest_score) {
+      highest_score <- grades[i, j]
+    }
+  }
+  if (highest_score > 90) {
+    print(paste(grades$Name[i], "'s highest grade this semester is", highest_score))
+  }
+}
+```
+```
+
+
+
+
+
 
 
 
